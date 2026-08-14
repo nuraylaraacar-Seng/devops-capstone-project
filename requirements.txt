@@ -1,5 +1,5 @@
 # Pin dependancies that might cause breakage
-Werkzeug==2.1.2
+Werkzeug==3.1.6
 SQLAlchemy==1.4.46
 
 # Build dependencies
