@@ -97,12 +97,29 @@ def list_accounts():
     accounts = Account.all()
     results = [account.serialize() for account in accounts]
     app.logger.info("Returning [%s] accounts", len(results))
-    return jsonify(results), status.HTTP_200_OK#############################
+    return jsonify(results), status.HTTP_200_OK
+#############################
 # DELETE AN ACCOUNT
 ######################################################################
 
-# ... place you code here to DELETE an account ...
+@app.route("/accounts/<int:account_id>", methods=["DELETE"])
+def delete_accounts(account_id):
+    """
+    Delete an Account
+    This endpoint will delete an Account based on the id specified
+    """
+    app.logger.info("Request to delete an Account with id: %s", account_id)
+    account = Account.find(account_id)
+    if account:
+        account.delete()
+    return "", status.HTTP_204_NO_CONTENT
 
+# ... place you code here to DELETE an account ...
+def test_delete_account(self):
+        """It should Delete an Account"""
+        account = self._create_accounts(1)[0]
+        resp = self.client.delete(f"{BASE_URL}/{account.id}")
+        self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
 
 ######################################################################
 #  U T I L I T Y   F U N C T I O N S
